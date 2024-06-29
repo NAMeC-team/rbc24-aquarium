@@ -34,7 +34,6 @@ export type Team = {
 }
 
 export type GameState = {
-  alliesBot: any
   ally: Team
   enemy: Team
   positiveHalf: string
@@ -47,7 +46,4 @@ export type World = {
   enemiesBot: Record<number, Robot<EnemyInfo>>
   ball: Ball | null
   teamColor: TeamColor
-  ally: Team
-  enemy: Team
-  positiveHalf: string
 }

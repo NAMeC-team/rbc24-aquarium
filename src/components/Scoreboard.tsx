@@ -29,7 +29,6 @@ export function Scoreboard() {
   useEffect(() => {
     if (world == null) return
     getInfos()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [world])
 
   return (
