@@ -1,10 +1,11 @@
 import type { Command } from "./command"
-import { AllyInfo, EnemyInfo, GameState, Robot, TeamColor } from "./world"
+import { AllyInfo, EnemyInfo, GameData, RefereeOrders, Robot, TeamColor } from "./world"
 import { Ball, Geometry } from "./geometry"
 import { Annotation } from "./annotation"
 
 export type WorldMessage = {
-  state: GameState
+  refOrders: RefereeOrders
+  state: GameData
   geometry: Geometry
   alliesBot: [number, Robot<AllyInfo>][]
   enemiesBot: [number, Robot<EnemyInfo>][]
