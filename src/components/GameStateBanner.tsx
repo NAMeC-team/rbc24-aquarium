@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { RootState } from "../app/store"
+import "./GameStateBanner.css"
 
 type StateInfo = {
   mainState: string
@@ -15,22 +16,34 @@ export function GameStateBanner() {
 
   const world = useSelector((state: RootState) => state.crabe.world)
 
+  function toUppercaseWithSpaces(wholeWord: string): string {
+    return wholeWord.match(/([A-Z]|[a-z])[a-z]+/g)
+      ?.map((word: string, idx: number): string => {
+        if (idx === 0) return word[0].toUpperCase() + word.slice(1, word.length)
+        else return word
+      })
+      ?.reduce((word, acc) => word + " " + acc)
+      || ""
+  }
+
   useEffect(() => {
     if (world == null) return
     else {
       const state = world.data.refOrders.state
+      const rawMainState = Object.keys(state)[0]
+      const rawSubState = Object.values(state)[0]
       setStateInfo({
-        mainState: Object.keys(state)[0],
-        subState: Object.values(state)[0],
+        mainState: toUppercaseWithSpaces(rawMainState),
+        subState: toUppercaseWithSpaces(rawSubState),
       } as StateInfo)
     }
   }, [world])
 
   return (
     <div className="gameStateBanner">
-      <p>
+      <h2>
         {stateInfo.mainState} : {stateInfo.subState}
-      </p>
+      </h2>
     </div>
   )
 }

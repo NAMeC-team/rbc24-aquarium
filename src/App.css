@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   font-family: 'Jost', sans-serif;
-  background-color: black;
+  background-color: #3b3f47;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -19,8 +19,6 @@ main {
 
 .sidebar {
   width: 60%;
-  height: 100vh;
-  background-color: #3b3f47;
 }
 
 .container{
@@ -29,24 +27,20 @@ main {
 }
 
 .field-wrapper {
-  width: 100;
+  width: 100%;
   height: 100%;
-  background-color: #3b3f47;
   display: flex;
-
-
 }
 
 .field-wrapper > canvas {
-  height: 95vh;
-  width: 80vw;
+  height: 87vh;
+  width: 75vw;
 }
 
 .Scoreboard{
-  height: 5vh;
-  width: 80vw;
+  height: fit-content;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #3b3f47;
 }

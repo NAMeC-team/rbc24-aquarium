@@ -2,7 +2,6 @@ import { Ref, useEffect, useRef, useState } from "react"
 import "./Scoreboard.css"
 import { useSelector } from "react-redux"
 import { RootState } from "../app/store"
-import { CrabeState } from "../types/state"
 
 export function Scoreboard() {
   const scoreboardRef: Ref<HTMLDivElement> = useRef(null)

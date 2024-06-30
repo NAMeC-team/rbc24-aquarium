@@ -11,11 +11,11 @@ function App() {
         <div className="container">
           <div className="Scoreboard">
             <Scoreboard />
+            <GameStateBanner />
           </div>
           <div className="field-wrapper">
             <FieldView />
           </div>
-          <GameStateBanner />
         </div>
         <aside className="sidebar">
           <Sidebar />
