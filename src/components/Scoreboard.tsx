@@ -9,20 +9,19 @@ export function Scoreboard() {
 
   let nameLeftTeam = "NAMeC"
   let nameRightTeam = "TIGERS"
-  let [scoreAlly, setScoreAlly] = useState(0)
-  let [scoreEnemy, setScoreEnemy] = useState(0)
-  let [minutes, setMinutes] = useState(5)
-  let [seconds, setSeconds] = useState(36)
+  let [scoreAlly, setScoreAlly] = useState(-1)
+  let [scoreEnemy, setScoreEnemy] = useState(-1)
+  let [minutes, setMinutes] = useState(-1)
+  let [seconds, setSeconds] = useState(-1)
 
   function getInfos() {
-    /*    nameLeftTeam = world.ally.name
-    nameRightTeam = world.enemy.name
-    setScoreAlly(world.ally.score)
-    setScoreEnemy(world.enemy.score)
-    
-    setMinutes(Il faut trouver ou recup les minutes)
-    setSeconds(Il faut trouver ou recup les secondes)
-    */
+    nameLeftTeam = world.data.ally.info.name
+    nameRightTeam = world.data.enemy.info.name
+    setScoreAlly(world.data.ally.info.score)
+    setScoreEnemy(world.data.enemy.info.score)
+
+    setMinutes(Math.round(world.data.stageInfo.time_left_secs / 60))
+    setSeconds(world.data.stageInfo.time_left_secs % 60)
   }
 
   useEffect(() => {

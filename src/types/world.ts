@@ -36,10 +36,32 @@ export enum TeamColor {
   Yellow = "yellow",
 }
 
-export type Team = {
-  color: string
+export type TeamInfo = {
+  ball_placement_failures: number
+  ball_placement_failures_reached: boolean
+  bot_substitution_allowed: boolean
+  bot_substitution_intent: boolean
+  can_place_ball: boolean
+  foul_counter: number
+  goalkeeper: number
+  max_allowed_bots: number
   name: string
+  red_cards: number
   score: number
+  timeout_time: number
+  timeouts: number
+  yellow_card_times: number[] // sorted from smallest to biggest
+  yellow_cards: number
+}
+
+export type Team = {
+  color: TeamColor
+  info: TeamInfo
+}
+
+export type StageInfo = {
+  stage: string
+  time_left_secs: number
 }
 
 export type GameData = {
@@ -47,6 +69,7 @@ export type GameData = {
   enemy: Team
   positiveHalf: string
   refOrders: RefereeOrders
+  stageInfo: StageInfo
 }
 
 export type RefereeOrders = {

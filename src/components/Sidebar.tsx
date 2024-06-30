@@ -25,6 +25,7 @@ export function Sidebar() {
           <div>
             {Object.values(allyInfos).map((allyInfo) => (
               <RobotDataCard
+                key={allyInfo.id}
                 id={allyInfo.id}
                 positionX={allyInfo.pose.position[0]}
                 positionY={allyInfo.pose.position[1]}

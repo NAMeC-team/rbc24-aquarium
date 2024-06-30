@@ -7,7 +7,7 @@ export const crabeSlice = createSlice({
   initialState: {} as CrabeState,
   reducers: {
     receiveData(state, action: PayloadAction<ToolMessage>) {
-      //console.log(action.payload)
+      console.log(action.payload.world)
       return {
         world: parseWorld(action.payload.world),
         annotations: convertArrayToObject(action.payload.data.annotations),
