@@ -126,7 +126,7 @@ export function drawBall(context: CanvasRenderingContext2D, ball: Ball) {
   context.stroke()
   context.fill()
   context.closePath()
-  context.strokeStyle = "#fff"
+  drawVelocity(context, ball.position[0], ball.position[1], [ball.velocity[0], ball.velocity[1]])
 }
 
 function drawCircle(context: CanvasRenderingContext2D, circle: Circle) {
@@ -172,6 +172,18 @@ export function drawAnnotation(
   }
 }
 
+function drawVelocity(context: CanvasRenderingContext2D, x: number, y: number, velocity: [number, number]) {
+  console.log(velocity)
+  context.beginPath()
+  context.strokeStyle = "#ffaaaa"
+  context.lineWidth = 0.01
+  context.moveTo(x, y)
+  context.lineTo(x + velocity[0], y + velocity[1])
+  context.stroke()
+  context.closePath()
+  context.strokeStyle = "#fff"
+}
+
 export function drawBot(
   context: CanvasRenderingContext2D,
   allies: Record<number, Robot<AllyInfo>>,
@@ -187,6 +199,7 @@ export function drawBot(
       enemy.pose.orientation,
     )
     drawText(context, enemy.pose.position[0], enemy.pose.position[1], enemy.id)
+    drawVelocity(context, enemy.pose.position[0], enemy.pose.position[1], enemy.velocity.linear)
   }
 
   for (const ally of Object.values(allies)) {
@@ -198,6 +211,7 @@ export function drawBot(
       ally.pose.orientation,
     )
     drawText(context, ally.pose.position[0], ally.pose.position[1], ally.id)
+    drawVelocity(context, ally.pose.position[0], ally.pose.position[1], ally.velocity.linear)
   }
 
   context.strokeStyle = "#fff"

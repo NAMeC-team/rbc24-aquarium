@@ -13,6 +13,7 @@ export type Line = {
 
 export type Ball = {
   position: [number, number, number]
+  velocity: [number, number, number]
 }
 
 export type Circle = {
