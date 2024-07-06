@@ -17,7 +17,7 @@ export function GameStateBanner() {
   const world = useSelector((state: RootState) => state.crabe.world)
 
   function toUppercaseWithSpaces(wholeWord: string): string {
-    return wholeWord.match(/([A-Z]|[a-z])[a-z]+/g)
+    return wholeWord?.match(/([A-Z]|[a-z])[a-z]+/g)
       ?.map((word: string, idx: number): string => {
         if (idx === 0) return word[0].toUpperCase() + word.slice(1, word.length)
         else return word
@@ -26,15 +26,23 @@ export function GameStateBanner() {
       || ""
   }
 
+  function flattenState(rawSubState: string | Object): string {
+    if (rawSubState instanceof Object) {
+      return Object.keys(rawSubState).toString() + " " + Object.values(rawSubState).toString()
+    } else return rawSubState
+  }
+
   useEffect(() => {
     if (world == null) return
     else {
       const state = world.data.refOrders.state
       const rawMainState = Object.keys(state)[0]
       const rawSubState = Object.values(state)[0]
+      const filteredState = flattenState(rawSubState)
+
       setStateInfo({
         mainState: toUppercaseWithSpaces(rawMainState),
-        subState: toUppercaseWithSpaces(rawSubState),
+        subState: toUppercaseWithSpaces(filteredState),
       } as StateInfo)
     }
   }, [world])
