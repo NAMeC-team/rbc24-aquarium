@@ -173,7 +173,6 @@ export function drawAnnotation(
 }
 
 function drawVelocity(context: CanvasRenderingContext2D, x: number, y: number, velocity: [number, number]) {
-  console.log(velocity)
   context.beginPath()
   context.strokeStyle = "#ffaaaa"
   context.lineWidth = 0.01
