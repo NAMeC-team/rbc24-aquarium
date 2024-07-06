@@ -20,14 +20,18 @@ export type Circle = {
   radius: number
 }
 
-type GoalOrPenalty = {
+export type Goal = {
   depth: number
   width: number
-  topLeftPosition: [number, number]
+  line: Line
 }
 
-export type Goal = GoalOrPenalty
-export type Penalty = GoalOrPenalty
+export type Penalty = {
+  depth: number
+  width: number
+  frontLine: Line
+}
+
 export type Field = {
   width: number
   length: number
