@@ -10,7 +10,7 @@ export type Location = [number, number]
 // available from typescript >= 4.4
 // https://devblogs.microsoft.com/typescript/announcing-typescript-4-4-beta/#symbol-template-signatures
 export type GameState = {
-  [key: string]: string
+  [key: string]: Object | string
 }
 
 export type Pose = {
