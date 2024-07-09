@@ -14,31 +14,31 @@ import type { Annotation } from "../types/annotation"
 import { AnnotationKind } from "../types/annotation"
 
 function drawGoal(context: CanvasRenderingContext2D, goal: Goal) {
-  let factor = goal.topLeftPosition[0] > 0 ? -1 : 1
+  let factor = goal.line.start[0] > 0 ? -1 : 1
   context.strokeRect(
-    goal.topLeftPosition[0],
-    goal.topLeftPosition[1],
+    goal.line.start[0],
+    goal.line.start[1],
     factor * goal.depth,
     factor * goal.width,
   )
 }
 
 function drawPenalty(context: CanvasRenderingContext2D, penalty: Penalty) {
-  let factor = penalty.topLeftPosition[0] > 0 ? -1 : 1
+  let factor = penalty.frontLine.start[0] > 0 ? -1 : 1
   context.strokeRect(
-    penalty.topLeftPosition[0],
-    penalty.topLeftPosition[1],
-    factor * penalty.depth,
+    penalty.frontLine.start[0],
+    penalty.frontLine.start[1],
+    - factor * penalty.depth,
     factor * penalty.width,
   )
 }
 
-export function drawField(
+export function drawFieldHorizontal(
   context: CanvasRenderingContext2D,
   geometry: Geometry,
   color: TeamColor,
 ) {
-  context.fillStyle = "#009933"
+  context.fillStyle = "#4a9c40"
   context.fillRect(
     -geometry.field.length / 2 - geometry.boundaryWidth,
     -geometry.field.width / 2 - geometry.boundaryWidth,
@@ -75,9 +75,9 @@ export function drawField(
   context.closePath()
 
   // Goal
-  context.strokeStyle = color === TeamColor.Blue ? "#249ed6" : "#dbd81d"
+  context.strokeStyle = color === TeamColor.Blue ? "#19439e" : "#dbd81d"
   drawGoal(context, geometry.allyGoal)
-  context.strokeStyle = color === TeamColor.Blue ? "#dbd81d" : "#249ed6"
+  context.strokeStyle = color === TeamColor.Blue ? "#dbd81d" : "#19439e"
   drawGoal(context, geometry.enemyGoal)
 
   // Penalty
@@ -120,13 +120,13 @@ function drawText(
 
 export function drawBall(context: CanvasRenderingContext2D, ball: Ball) {
   context.beginPath()
-  context.strokeStyle = "orange"
-  context.fillStyle = "orange"
+  context.strokeStyle = "#ff0000"
+  context.fillStyle = "#ff0000"
   context.arc(ball.position[0], ball.position[1], 0.02, 0, 2 * Math.PI)
   context.stroke()
   context.fill()
   context.closePath()
-  context.strokeStyle = "#fff"
+  drawVelocity(context, ball.position[0], ball.position[1], [ball.velocity[0], ball.velocity[1]])
 }
 
 function drawCircle(context: CanvasRenderingContext2D, circle: Circle) {
@@ -172,6 +172,17 @@ export function drawAnnotation(
   }
 }
 
+function drawVelocity(context: CanvasRenderingContext2D, x: number, y: number, velocity: [number, number]) {
+  context.beginPath()
+  context.strokeStyle = "#ffaaaa"
+  context.lineWidth = 0.01
+  context.moveTo(x, y)
+  context.lineTo(x + velocity[0], y + velocity[1])
+  context.stroke()
+  context.closePath()
+  context.strokeStyle = "#fff"
+}
+
 export function drawBot(
   context: CanvasRenderingContext2D,
   allies: Record<number, Robot<AllyInfo>>,
@@ -179,7 +190,7 @@ export function drawBot(
   color: TeamColor,
 ) {
   for (const enemy of Object.values(enemies)) {
-    context.fillStyle = color === TeamColor.Blue ? "#dbd81d" : "#249ed6"
+    context.fillStyle = color === TeamColor.Blue ? "#afb830" : "#18749e"
     drawRobotShape(
       context,
       enemy.pose.position[0],
@@ -187,10 +198,11 @@ export function drawBot(
       enemy.pose.orientation,
     )
     drawText(context, enemy.pose.position[0], enemy.pose.position[1], enemy.id)
+    drawVelocity(context, enemy.pose.position[0], enemy.pose.position[1], enemy.velocity.linear)
   }
 
   for (const ally of Object.values(allies)) {
-    context.fillStyle = color === TeamColor.Blue ? "#249ed6" : "#dbd81d"
+    context.fillStyle = color === TeamColor.Blue ? "#18749e" : "#afb830"
     drawRobotShape(
       context,
       ally.pose.position[0],
@@ -198,6 +210,7 @@ export function drawBot(
       ally.pose.orientation,
     )
     drawText(context, ally.pose.position[0], ally.pose.position[1], ally.id)
+    drawVelocity(context, ally.pose.position[0], ally.pose.position[1], ally.velocity.linear)
   }
 
   context.strokeStyle = "#fff"
