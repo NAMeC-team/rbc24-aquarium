@@ -146,6 +146,9 @@ export function drawLine(context: CanvasRenderingContext2D, line: Line) {
 
 export function drawPoint(context: CanvasRenderingContext2D, point: Point) {
   context.beginPath()
+  context.arc(point[0], point[1], 0.02, 0, 2 * Math.PI)
+  context.stroke()
+  context.closePath()
 }
 
 export function drawRect(context: CanvasRenderingContext2D, rect: Rectangle) {
