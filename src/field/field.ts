@@ -7,6 +7,7 @@ import type {
   Penalty,
   Point,
   Rectangle,
+  Arc,
 } from "../types/geometry"
 import type { AllyInfo, EnemyInfo, Robot } from "../types/world"
 import { TeamColor } from "../types/world"
@@ -152,13 +153,25 @@ export function drawPoint(context: CanvasRenderingContext2D, point: Point) {
 }
 
 export function drawRect(context: CanvasRenderingContext2D, rect: Rectangle) {
+  context.beginPath()
   context.rect(rect.position[0], rect.position[1], rect.width, rect.height)
+  context.stroke()
+  context.closePath()
 }
+
+export function drawArc(context: CanvasRenderingContext2D, arc: Arc) {
+  context.beginPath()
+  console.log(arc.center[0], arc.center[1], arc.radius, arc.start, arc.end)
+  context.arc(arc.center[0], arc.center[1], arc.radius, arc.start, arc.end)
+  context.stroke()
+  context.closePath()
+}
+
 export function drawAnnotation(
   context: CanvasRenderingContext2D,
   annotation: Annotation,
 ) {
-  context.strokeStyle = "red"
+  context.strokeStyle = "orange"
   switch (annotation.kind) {
     case AnnotationKind.Rectangle:
       drawRect(context, annotation.content)
@@ -171,6 +184,9 @@ export function drawAnnotation(
       break
     case AnnotationKind.Circle:
       drawCircle(context, annotation.content)
+      break
+    case AnnotationKind.Arc:
+      drawArc(context, annotation.content)
       break
   }
 }

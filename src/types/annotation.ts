@@ -1,4 +1,4 @@
-import type { Circle, Line, Point, Rectangle } from "./geometry"
+import type { Circle, Line, Point, Rectangle, Arc } from "./geometry"
 
 export type CircleAnnotation = {
   kind: AnnotationKind.Circle
@@ -20,15 +20,22 @@ export type PointAnnotation = {
   content: Point
 }
 
+export type ArcAnnotation = {
+  kind: AnnotationKind.Arc
+  content: Arc
+}
+
 export type Annotation =
   | CircleAnnotation
   | LineAnnotation
   | PointAnnotation
   | RectangleAnnotation
+  | ArcAnnotation
 
 export enum AnnotationKind {
   Line = "line",
   Point = "point",
   Rectangle = "rectangle",
   Circle = "circle",
+  Arc = "arc",
 }

@@ -21,6 +21,13 @@ export type Circle = {
   radius: number
 }
 
+export type Arc = {
+  center: [number, number]
+  radius: number
+  start: number
+  end: number
+}
+
 export type Goal = {
   depth: number
   width: number
