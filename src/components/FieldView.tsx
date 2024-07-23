@@ -15,7 +15,8 @@ export function FieldView() {
     if (horizontal)
     {
       const ratio = field.width / field.length
-      context.canvas.width = context.canvas.offsetWidth
+      let parent = context.canvas.parentElement
+      context.canvas.width = parent != null ? parent.clientWidth : context.canvas.offsetWidth
       context.canvas.height = context.canvas.width * ratio
       clearCanvas(context)
 

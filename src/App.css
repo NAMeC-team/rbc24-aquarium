@@ -12,29 +12,27 @@ body{
 }
 
 main {
+  width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: row;
 }
 
 .sidebar {
-  width: 60%;
+  padding-inline: 2rem;
+  width: 20%;
 }
 
 .container{
+  width: 80%;
   display: flex;
   flex-direction: column;
 }
 
 .field-wrapper {
-  width: 100%;
-  height: 100%;
+  position: relative;
   display: flex;
-}
-
-.field-wrapper > canvas {
-  height: 87vh;
-  width: 75vw;
+  min-height: 0;
 }
 
 .Scoreboard{
