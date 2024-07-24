@@ -53,4 +53,6 @@ export type Geometry = {
   enemyGoal: Goal
   allyPenalty: Penalty
   enemyPenalty: Penalty
+  robotRadius: number
+  ballRadius: number
 }
