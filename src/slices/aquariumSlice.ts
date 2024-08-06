@@ -10,7 +10,7 @@ export const aquariumSlice = createSlice({
   name: "aquarium",
   initialState: {} as AquariumState,
   reducers: {
-    setClickedBot(state, action: PayloadAction<Robot<AllyInfo>>) {
+    setClickedBot(state, action: PayloadAction<Robot<AllyInfo> | null>) {
       return {
         clickedRobot: action.payload,
       }
