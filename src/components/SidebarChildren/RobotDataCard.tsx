@@ -1,8 +1,10 @@
 import React from "react"
 import "./RobotData.css"
+import { TeamColor } from "../../types/world"
 
 interface RobotDataProps {
   id: number
+  teamColor: TeamColor
   positionX: number
   positionY: number
   angVelo: number
@@ -73,7 +75,7 @@ function grabSVG(props: RobotDataProps) {
           <stop offset="100%" stop-opacity="0" stop-color="black"/>
       </linearGradient>
       <circle cx={px} cy={py} r={BOT_RADIUS * scale} fill="url(#botshape)"/>
-      <circle cx={px} cy={py} r={CENTER_RADIUS * scale} fill="yellow"/>
+      <circle cx={px} cy={py} r={CENTER_RADIUS * scale} fill={props.teamColor == TeamColor.Blue ? "blue" : "yellow"}/>
       <circle cx={px - OFFSET_X_BOTTOM*scale} cy={py + OFFSET_Y_BOTTOM*scale} r={SMALL_RADIUS * scale} fill={vision_pattern.bottom_left}/>
       <circle cx={px + OFFSET_X_BOTTOM*scale} cy={py + OFFSET_Y_BOTTOM*scale} r={SMALL_RADIUS * scale} fill={vision_pattern.bottom_right}/>
       <circle cx={px - OFFSET_X_TOP*scale} cy={py - OFFSET_Y_TOP*scale} r={SMALL_RADIUS * scale} fill={vision_pattern.top_left}/>

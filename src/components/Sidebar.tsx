@@ -26,6 +26,7 @@ export function Sidebar() {
             {Object.values(allyInfos).map((allyInfo) => (
               <RobotDataCard
                 key={allyInfo.id}
+                teamColor={world.teamColor}
                 id={allyInfo.id}
                 positionX={allyInfo.pose.position[0]}
                 positionY={allyInfo.pose.position[1]}
