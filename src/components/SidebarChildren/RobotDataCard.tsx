@@ -62,7 +62,7 @@ function grabSVG(props: RobotDataProps) {
   const px = display_radius;
   const py = display_radius;
 
-  const deg_rotation = (props.orientation + Math.PI / 2) * 180 / Math.PI;
+  const deg_rotation = (-props.orientation + Math.PI / 2) * 180 / Math.PI;
   const rotation_transformation = `rotate(${deg_rotation} 0 0)`;
   const viewBox = `0 0 ${display_radius * 2} ${display_radius * 2}`;
   const vision_pattern = VISION_PATTERN_COLOR[props.id % VISION_PATTERN_COLOR.length];
