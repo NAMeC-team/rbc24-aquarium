@@ -30,6 +30,7 @@ main {
 }
 
 .field-wrapper {
+  justify-content: center;
   position: relative;
   display: flex;
   min-height: 0;
