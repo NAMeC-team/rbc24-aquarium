@@ -18,19 +18,16 @@ interface RobotDataProps {
 }
 
 var interval: any;
-var mouseDown = false;
 const RobotDataCard: React.FC<RobotDataProps> = (props) => {
   const dispatch = useDispatch();
 
   function mouseDownHandler() {
-    mouseDown = true;
     interval = setInterval(() => {
       manualControl();
     })
   } 
 
   function mouseUpHandler() {
-    mouseDown = false;
     clearInterval(interval);
   }
 
