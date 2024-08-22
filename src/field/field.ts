@@ -13,6 +13,8 @@ import type { AllyInfo, EnemyInfo, Robot } from "../types/world"
 import { TeamColor } from "../types/world"
 import type { Annotation } from "../types/annotation"
 import { AnnotationKind } from "../types/annotation"
+import { RootState, store } from "../app/store"
+
 
 function drawGoal(context: CanvasRenderingContext2D, goal: Goal) {
   let factor = goal.line.start[0] > 0 ? -1 : 1
@@ -39,6 +41,7 @@ export function drawFieldHorizontal(
   geometry: Geometry,
   color: TeamColor,
 ) {
+  context.lineWidth = 0.02
   context.fillStyle = "#4a9c40"
   context.fillRect(
     -geometry.field.length / 2 - geometry.boundaryWidth,
@@ -208,6 +211,7 @@ export function drawBot(
   enemies: Record<number, Robot<EnemyInfo>>,
   color: TeamColor,
 ) {
+
   for (const enemy of Object.values(enemies)) {
     context.fillStyle = color === TeamColor.Blue ? "#afb830" : "#18749e"
     drawRobotShape(
@@ -216,6 +220,7 @@ export function drawBot(
       enemy.pose.position[1],
       enemy.pose.orientation,
     )
+    
     drawText(context, enemy.pose.position[0], enemy.pose.position[1], enemy.id)
     drawVelocity(context, enemy.pose.position[0], enemy.pose.position[1], enemy.velocity.linear)
   }
@@ -228,6 +233,23 @@ export function drawBot(
       ally.pose.position[1],
       ally.pose.orientation,
     )
+    const state: RootState = store.getState();
+    const clickedRobot = state.aquarium.clickedRobot;
+    if (clickedRobot && clickedRobot.id === ally.id) {
+      context.lineWidth = 0.03
+      context.beginPath()
+      context.strokeStyle = "white"
+      context.arc(
+        ally.pose.position[0],
+        ally.pose.position[1],
+        0.085,
+        0,
+        2 * Math.PI,
+        true,
+      )
+      context.stroke()
+      context.closePath()
+    }
     drawText(context, ally.pose.position[0], ally.pose.position[1], ally.id)
     drawVelocity(context, ally.pose.position[0], ally.pose.position[1], ally.velocity.linear)
   }
